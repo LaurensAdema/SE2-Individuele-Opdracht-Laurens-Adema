@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Tweakers.Administration">
+    <Position X="16" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACIwAEASAAcAAiAEIQBAAAIAEAABgQQRUACTQcAgIAE=</HashCode>
+      <FileName>Administration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Update">
+    <Position X="7.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAgABAAAAAQAAAAAAAAAAAAAECABAACAE=</HashCode>
+      <FileName>Update.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Video">
+    <Position X="10" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Video.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Article">
+    <Position X="9" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAgAAAEAAQAAAAAAAAAAAEAABgAAAIAAAAAA=</HashCode>
+      <FileName>Article.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Reaction">
+    <Position X="12" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAwAAAAAAAAAABAAAQAAAAAEA=</HashCode>
+      <FileName>Reaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Category">
+    <Position X="12" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAQAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Database">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAIAgAAEAAAACAAAAAACAAAA=</HashCode>
+      <FileName>Database.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Database_Accounts">
+    <Position X="3.25" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAQAAAAAAAAAAAAAAAAACAUAAABE=</HashCode>
+      <FileName>Database_Accounts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Database_Article">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAASAAEAAAAAAAAAAAAAAAAAAAAAEAAAAIAAAAA=</HashCode>
+      <FileName>Database_Article.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Database_Reaction">
+    <Position X="10.25" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAgAAAAAAAAAAAAAAAAARAAABAAAgAAA=</HashCode>
+      <FileName>Database_Reaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Database_Categories">
+    <Position X="12.75" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAYAAAAAAAAAAAAAAAAAgQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Database_Categories.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Account">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAACYAYAAAAwAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Editor">
+    <Position X="2.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAggIAAAAACAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Editor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Admin">
+    <Position X="5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Admin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.OS">
+    <Position X="13.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>OS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Database_OS">
+    <Position X="8" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAEAAAAAQAQAAAAAAAAAA=</HashCode>
+      <FileName>Database_OS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tweakers.Encrypt">
+    <Position X="13.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Encrypt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

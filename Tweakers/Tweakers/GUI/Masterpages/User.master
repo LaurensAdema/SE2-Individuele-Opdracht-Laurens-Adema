@@ -1,0 +1,24 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/GUI/Masterpages/Main.Master" AutoEventWireup="true" CodeBehind="User.master.cs" Inherits="Tweakers.GUI.Masterpages.User" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="StyleSection" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="NavSection" runat="server">
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span runat="server" id="lblUser">User</span><span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li runat="server" id="Li1"><a href="#">Gebruikers</a></li>
+                <li class="divider"></li>
+                <li runat="server" id="Li2"><a href="#">Tweakotine ranglijst</a></li>
+                <li runat="server" id="Li3"><a href="#">Karma ranglijst</a></li>
+                <li class="divider"></li>
+                <li runat="server" id="Li4"><a href="../All/Logout.aspx">Uitloggen</a></li>
+            </ul>
+        </li>
+    </ul>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentSection" runat="server">
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
+            </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="ScriptSection" runat="server">
+</asp:Content>

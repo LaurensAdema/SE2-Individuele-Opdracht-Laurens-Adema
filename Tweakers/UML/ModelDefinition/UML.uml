@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="004b2e6a-b1d6-434c-8aff-4a86f4258f26"
+  name="UML" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="822f36fe-3cb0-4e6d-a35e-662b6f4e5851"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3D::"
+      tag="ViewCode" />
+  </referencesInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="3f123dd8-5d06-4f4d-9f90-42ba4f4308b9">
+      <profileInstance
+        Id="733ef04c-5173-4de4-a59b-25d2b2f11213"
+        name="CSharpProfile" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="7a7edbbd-7959-470e-acbd-c75920e0ace5"
+        LastKnownName="Tweakers"
+        LastKnownLocation="Package_0716.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="9c19471c-30b7-4336-a13d-dd700a009692"
+        LastKnownName="System"
+        LastKnownLocation="Package1_0716.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="a7053156-b16d-499d-a6d0-0b90be07218d"
+        name="List&lt;&gt;"
+        visibility="Private"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="f265b410-e9fc-4ebe-a585-4b4c73220cb5"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FD:%2FDropbox%2FFontys HBO ICT%2FS2%2FSE2%2FIndividuele Opdracht%2FTweakers%2FTweakers%2Fbin%2FTweakers.dll&quot; Type%3D(Name%3DList&lt;&gt; GenericParameterCount%3D1 GenericArguments%3D[(Assembly%3D&quot;file:%2F%2F%2FD:%2FDropbox%2FFontys HBO ICT%2FS2%2FSE2%2FIndividuele Opdracht%2FTweakers%2FTweakers%2Fbin%2FTweakers.dll&quot; Namespace%3DTweakers Type%3DCategory)])"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="53545eaf-c283-4189-9d3e-4fa7f61c8efa"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f60adb4c-3574-4c52-bb6e-537193919fd2">
+                <propertyInstance
+                  Id="dd6dbab4-30ea-4c52-9d92-13063258c8a7"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="33e38a11-930b-4ce0-972f-70e94c1bdced">
+                <propertyInstance
+                  Id="a06041fc-9993-44af-8981-0748068ca01d"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="048cf73e-c2c6-41b7-b332-5dd02bdcb94e">
+                <propertyInstance
+                  Id="e9d8c53d-df4e-4908-908b-db5748cb2832"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="9bbcf03e-c252-441d-af07-e9844554201b">
+                <propertyInstance
+                  Id="3c329eb3-6944-4235-90e1-a4e8a16151cc"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="011987a8-941e-435f-a71a-5350b3983a23">
+                <propertyInstance
+                  Id="8d1fe420-fd34-4b95-9d68-0fdf9c4a5991"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>
