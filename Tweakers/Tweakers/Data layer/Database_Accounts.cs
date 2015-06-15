@@ -16,48 +16,53 @@ namespace Tweakers
             accountParameters.Add(new OracleParameter(":ID", ID));
 
             OracleDataReader getAccount = Read(accountQuery, accountParameters);
-            if (getAccount.HasRows)
+            if (getAccount != null)
             {
-                while (getAccount.Read())
+                if (getAccount.HasRows)
                 {
-                    string userName = Convert.ToString(getAccount["gebruikersNaam"]);
-                    string email = Convert.ToString(getAccount["email"]);
-                    int tweakotine = 0;
-                    Int32.TryParse(getAccount["tweakotine"].ToString(), out tweakotine);
-                    int karma = 0;
-                    Int32.TryParse(getAccount["karma"].ToString(), out karma);
-                    DateTime birthDate;
-                    DateTime.TryParse(getAccount["geboorteDatum"].ToString(), out birthDate);
-                    string city = Convert.ToString(getAccount["woonplaats"]);
-                    char gender;
-                    Char.TryParse(getAccount["geslacht"].ToString(), out gender);
-                    char type;
-                    Char.TryParse(getAccount["G_type"].ToString(), out type);
-
-                    switch (type)
+                    while (getAccount.Read())
                     {
-                        case 'A':
-                            int adminID = Convert.ToInt32(getAccount["adminID"]);
-                            string fullNameAdmin = Convert.ToString(getAccount["volledigeNaamAdmin"]);
-                            account = new Admin(ID, userName, email, tweakotine, karma, birthDate, city, gender, adminID, fullNameAdmin);
-                            break;
-                        case 'R':
-                            int editorID = Convert.ToInt32(getAccount["redacteurID"]);
-                            string fullName = Convert.ToString(getAccount["volledigeNaam"]);
-                            string description = Convert.ToString(getAccount["beschrijving"]);
-                            string writesAbout = Convert.ToString(getAccount["schrijftOver"]);
-                            DateTime authorSince = Convert.ToDateTime(getAccount["auteurSinds"]);
-                            account = new Editor(ID, userName, email, tweakotine, karma, birthDate, city, gender,editorID, fullName, description, writesAbout, authorSince);
-                            break;
-                        default:
-                            account = new Account(ID, userName, email, tweakotine, karma, birthDate, city, gender);
-                            break;
-                    }
+                        string userName = Convert.ToString(getAccount["gebruikersNaam"]);
+                        string email = Convert.ToString(getAccount["email"]);
+                        int tweakotine = 0;
+                        Int32.TryParse(getAccount["tweakotine"].ToString(), out tweakotine);
+                        int karma = 0;
+                        Int32.TryParse(getAccount["karma"].ToString(), out karma);
+                        DateTime birthDate;
+                        DateTime.TryParse(getAccount["geboorteDatum"].ToString(), out birthDate);
+                        string city = Convert.ToString(getAccount["woonplaats"]);
+                        char gender;
+                        Char.TryParse(getAccount["geslacht"].ToString(), out gender);
+                        char type;
+                        Char.TryParse(getAccount["G_type"].ToString(), out type);
 
-                    break;
+                        switch (type)
+                        {
+                            case 'A':
+                                int adminID = Convert.ToInt32(getAccount["adminID"]);
+                                string fullNameAdmin = Convert.ToString(getAccount["volledigeNaamAdmin"]);
+                                account = new Admin(ID, userName, email, tweakotine, karma, birthDate, city, gender,
+                                    adminID, fullNameAdmin);
+                                break;
+                            case 'R':
+                                int editorID = Convert.ToInt32(getAccount["redacteurID"]);
+                                string fullName = Convert.ToString(getAccount["volledigeNaam"]);
+                                string description = Convert.ToString(getAccount["beschrijving"]);
+                                string writesAbout = Convert.ToString(getAccount["schrijftOver"]);
+                                DateTime authorSince = Convert.ToDateTime(getAccount["auteurSinds"]);
+                                account = new Editor(ID, userName, email, tweakotine, karma, birthDate, city, gender,
+                                    editorID, fullName, description, writesAbout, authorSince);
+                                break;
+                            default:
+                                account = new Account(ID, userName, email, tweakotine, karma, birthDate, city, gender);
+                                break;
+                        }
+
+                        break;
+                    }
                 }
+                getAccount.Close();
             }
-            getAccount.Close();
 
             Close();
 

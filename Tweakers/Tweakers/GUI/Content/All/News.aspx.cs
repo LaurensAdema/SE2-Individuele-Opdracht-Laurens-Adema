@@ -12,6 +12,7 @@ namespace Tweakers.GUI.Content.NotLogged
     public partial class News : System.Web.UI.Page
     {
         private StringBuilder reactionBuilder = new StringBuilder();
+        private List<Reaction> reactionsArticle; 
 
         protected void Page_PreInit(object sender, EventArgs e)
         {
@@ -74,11 +75,15 @@ namespace Tweakers.GUI.Content.NotLogged
 
         protected void LoadReactions(List<Reaction> reactions)
         {
-            foreach (Reaction reaction in reactions)
+            reactionsArticle = reactions;
+            while (reactionsArticle.Count > 0)
             {
-                LoadReaction(reaction);
+                Reaction thisReaction = reactionsArticle[0];
+                LoadReaction(thisReaction);
                 reactionBuilder.Append(String.Format("</div></div>"));
+                reactionsArticle.Remove(thisReaction);
             }
+            
         }
 
         protected void LoadReaction(Reaction reaction)
@@ -87,10 +92,12 @@ namespace Tweakers.GUI.Content.NotLogged
             {
                 LoadReaction(reaction.Parent);
                 reactionBuilder.Append(String.Format("<!-- Nested Comment --><div class=\"media\"><a class=\"pull-left\" href=\"GUI/Content/All/User.aspx?id={0}\"><img class=\"media-object\" src=\"http://placehold.it/64x64\" alt=\"\"></a><div class=\"media-body\"><h4 class=\"media-heading\"><a href=\"GUI/Content/All/User.aspx?id={0}\">{1}</a><small>{2}</small></h4>{3}</div></div><!-- End Nested Comment -->", reaction.Account.UserID, reaction.Account.Username, reaction.Date.ToString("d MMMM yyyy om HH:mm"), reaction.ReactionString));
+                reactionsArticle.Remove(reaction);
             }
             else
             {
                 reactionBuilder.Append(String.Format("<div class=\"media\"><a class=\"pull-left\" href=\"GUI/Content/All/User.aspx?id={0}\"><img class=\"media-object\" src=\"http://placehold.it/64x64\" alt=\"\"></a><div class=\"media-body\"><h4 class=\"media-heading\"><a href=\"GUI/Content/All/User.aspx?id={0}\">{1}</a><small>{2}</small></h4>{3}", reaction.Account.UserID, reaction.Account.Username, reaction.Date.ToString("d MMMM yyyy om HH:mm"), reaction.ReactionString));
+                reactionsArticle.Remove(reaction);
             }
         }
 

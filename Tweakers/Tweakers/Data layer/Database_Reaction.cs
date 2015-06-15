@@ -41,7 +41,7 @@ namespace Tweakers
                 {
                     while (getReaction.Read())
                     {
-                        int reactionID = Convert.ToInt32(getReaction["reactionID"]);
+                        int reactionID = Convert.ToInt32(getReaction["reactieID"]);
                         int userID = Convert.ToInt32(getReaction["gebruikerID"]);
                         int parentID = 0;
                         Int32.TryParse(getReaction["parentID"].ToString(), out parentID);
@@ -51,7 +51,8 @@ namespace Tweakers
                         Reaction parent = null;
                         if (parentID > 0)
                         {
-                            parent = GetReaction(parentID);
+                            Database_Reaction dbReaction = new Database_Reaction();
+                            parent = dbReaction.GetReaction(parentID);
                         }
 
                         reaction = new Reaction(reactionID, Administration.AdministrationProp.GetAccount(userID), parent, date, comment);
@@ -69,7 +70,7 @@ namespace Tweakers
         {
             List<Reaction> allReactions = new List<Reaction>();
 
-            string reactionQuery = "SELECT * FROM REACTIE WHERE artikelID = :articleID";
+            string reactionQuery = "SELECT * FROM REACTIE WHERE artikelID = :articleID ORDER BY datum ASC";
             List<OracleParameter> reactionParameters = new List<OracleParameter>();
             reactionParameters.Add(new OracleParameter(":articleID", ID));
 
@@ -98,7 +99,8 @@ namespace Tweakers
                             }
                             if (parent == null)
                             {
-                                parent = Administration.AdministrationProp.GetReaction(parentID);
+                                Database_Reaction dbReaction = new Database_Reaction();
+                                parent = dbReaction.GetReaction(parentID);
                             }
                         }
 
