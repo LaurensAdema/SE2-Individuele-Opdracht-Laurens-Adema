@@ -7,80 +7,67 @@ namespace Tweakers.Using
 {
     static public class SortOrder
     {
-        static public List<Reaction> OrderReactionsA(List<Reaction> reactions)
+        private static List<Reaction> remainingReactions;
+        private static List<Reaction> orderReactions = new List<Reaction>(); 
+
+        public static List<Reaction> OrderReactions(List<Reaction> reactions)
         {
-            List<Reaction> sortedReactions = new List<Reaction>();
+            remainingReactions = reactions;
 
             for (int i = 0; i < reactions.Count; i++)
             {
                 if (reactions[i].Parent == null)
                 {
-                    sortedReactions.Add(reactions[i]);
-                    reactions.Remove(reactions[i]);
+                    orderReactions.Add(reactions[i]);
+                    remainingReactions.Remove(reactions[i]);
                 }
             }
-            while (reactions.Count > 0)
+
+            while (remainingReactions.Count > 0)
             {
-                for (int i = 0; i < reactions.Count; i++)
+                foreach (Tuple<Reaction, Reaction> combination in FindChildren())
                 {
-                    if (reactions[i].Parent != null)
+                    orderReactions.Insert(orderReactions.IndexOf(combination.Item1)+1, combination.Item2);
+                    remainingReactions.Remove(combination.Item2);
+                }
+            }
+
+            return orderReactions;
+        }
+
+
+        static private List<Tuple<Reaction,Reaction>> FindChildren()
+        {
+            List<Tuple<Reaction, Reaction>> foundReactions = new List<Tuple<Reaction, Reaction>>();
+            foreach (Reaction remainingReaction in remainingReactions)
+            {
+                foreach (Reaction parent in orderReactions)
+                {
+                    if (remainingReaction.Parent.ReactionID == parent.ReactionID)
                     {
-                        sortedReactions.Insert(sortedReactions.IndexOf(reactions[i].Parent)+1, reactions[i]);
-                        reactions.Remove(reactions[i]);
+                        foundReactions.Add(new Tuple<Reaction, Reaction>(parent, remainingReaction));
+                        break;
                     }
                 }
             }
-
-            return sortedReactions;
+            return foundReactions;
         }
 
-        static public List<Reaction> OrderReactionsB(List<Reaction> reactions)
+        static private List<Reaction> GetChildren(Reaction parent)
         {
-            List<Reaction> sortedReactions = new List<Reaction>();
-
-            for (int i = 0; i < reactions.Count; i++)
+            List<Reaction> foundReactions = new List<Reaction>();
+            foreach (Reaction childReaction in remainingReactions)
             {
-                if (reactions[i].Parent == null)
+                if (childReaction.Parent.ReactionID == parent.ReactionID)
                 {
-                    sortedReactions.Add(reactions[i]);
-                    reactions.Remove(reactions[i]);
+                    foundReactions.Add(childReaction);
                 }
             }
-            while (reactions.Count > 0)
+            foreach (Reaction reactionFound in foundReactions)
             {
-                for (int i = 0; i < reactions.Count; i++)
-                {
-                    int children = 0;
-
-                    if (reactions[i].Parent != null)
-                    {
-                        int index = -1;
-
-                        for (int j = 0; j < sortedReactions.Count; j++)
-                        {
-                            if (sortedReactions[j].ReactionID == reactions[i].Parent.ReactionID)
-                            {
-                                index = j+1;
-                                break;
-                            }
-                        }
-                        
-                        if (index >= 0)
-                        {
-                            sortedReactions.Insert(index+children, reactions[i]);
-                            reactions.Remove(reactions[i]);
-                            children++;
-                        }
-                    }
-                }
+                remainingReactions.Remove(reactionFound);
             }
-
-            return sortedReactions;
-        }
-
-        static public List<Reaction> OrderReactions(List<Reaction> reactions)
-        {
-            return OrderReactionsB(reactions);
+            return foundReactions;
         }
     }
 }

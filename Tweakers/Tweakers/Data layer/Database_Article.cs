@@ -115,7 +115,7 @@ namespace Tweakers
         {
             List<Article> allNewsArticles = new List<Article>();
 
-            string newsQuery = "SELECT * FROM ARTIKEL A LEFT JOIN A_VIDEO V ON A.artikelID = V.artikelID WHERE (A.A_Soort != 'S' OR A.A_Soort IS NULL) AND datum = TO_DATE(:dateTime, 'dd-MM-YYYY')";
+            string newsQuery = "SELECT * FROM ARTIKEL A LEFT JOIN A_VIDEO V ON A.artikelID = V.artikelID WHERE (A.A_Soort != 'S' OR A.A_Soort IS NULL) AND datum LIKE TO_DATE(:dateTime, 'dd-MM-YYYY')";
             List<OracleParameter> newsParameters = new List<OracleParameter>();
             newsParameters.Add(new OracleParameter(":dateTime", dateTime.ToString("dd-MM-yyyy")));
 
