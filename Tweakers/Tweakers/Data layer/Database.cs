@@ -11,7 +11,7 @@ namespace Tweakers
 {
     abstract public class Database
     {
-        private const bool localhost = false;
+        private const bool localhost = true;
         protected OracleConnection Con { get; set; }
 
         protected internal void Connect()
@@ -24,7 +24,7 @@ namespace Tweakers
             {
                 try
                 {
-                    this.Con.ConnectionString = localhost ? "User Id=Tweakers;Password=Welkom01;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.1.107)(PORT=1521))(CONNECT_DATA=(SID=xe)));" : "User Id=dbi324942;Password=FSM6BF1PUf;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=fhictora01.fhict.local)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=fhictora)));";
+                    this.Con.ConnectionString = localhost ? "User Id=Tweakers;Password=Welkom01;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=ACER-Laurens)(PORT=1521))(CONNECT_DATA=(SID=xe)));" : "User Id=dbi324942;Password=FSM6BF1PUf;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=fhictora01.fhict.local)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=fhictora)));";
                     Con.Open();
                 }
                 catch (OracleException e)

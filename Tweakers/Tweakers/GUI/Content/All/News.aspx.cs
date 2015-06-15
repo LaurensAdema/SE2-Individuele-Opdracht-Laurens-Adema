@@ -70,6 +70,8 @@ namespace Tweakers.GUI.Content.NotLogged
 
                 LoadReactions(article.Reactions);
                 commentsArticle.InnerHtml = reactionBuilder.ToString();
+
+                categoryArticle.InnerHtml = LoadCategories(ID);
             }
         }
 
@@ -101,9 +103,63 @@ namespace Tweakers.GUI.Content.NotLogged
             }
         }
 
-        public static string FirstCharToUpper(string input)
+        protected string LoadCategories(int ID)
+        {
+            List<Category> categories = Administration.AdministrationProp.GetAllCategories(ID);
+            StringBuilder categoryHTML = new StringBuilder();
+
+            if (categories != null)
+            {
+                int leftRowCount = Convert.ToInt32(Math.Ceiling((double)categories.Count) / 2);
+
+                categoryHTML.Append("<div class=\"row\"><div class=\"col-lg-6\"><ul class=\"list-unstyled\">");
+
+                for (int i = 0; i < leftRowCount; i++)
+                {
+                    categoryHTML.Append(
+                        String.Format(
+                            "<li><a href=\"/GUI/Content/All/Category.aspx?id={0}\">{1}</a></li>",
+                            categories[i].CategoryID,
+                            categories[i].CategoryString));
+                }
+                categoryHTML.Append("</ul></div><div class=\"col-lg-6\"><ul class=\"list-unstyled\">");
+                for (int i = leftRowCount; i < categories.Count; i++)
+                {
+                    categoryHTML.Append(
+                        String.Format(
+                            "<li><a href=\"/GUI/Content/All/Category.aspx?id={0}\">{1}</a></li>",
+                            categories[i].CategoryID,
+                            categories[i].CategoryString));
+                }
+                categoryHTML.Append("</ul></div>");
+            }
+            
+
+            return categoryHTML.ToString();
+        }
+
+        public string FirstCharToUpper(string input)
         {
             return !String.IsNullOrEmpty(input) ? input.First().ToString().ToUpper() + input.Substring(1) : input;
+        }
+
+        public void btnSubmitReaction_OnClick(object sender, EventArgs e)
+        {
+            HttpCookie authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+
+            if (authCookie != null)
+            {
+                FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+
+                if (Page.IsValid)
+                {
+                    errorMessage.InnerText = "De ingevoerde gegevens zijn onjuist.";
+                }
+            }
+            else
+            {
+                errorMessage.InnerText = "U moet ingelogd zijn om een reactie te plaatsen.";
+            }
         }
     }
 }

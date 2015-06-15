@@ -179,9 +179,9 @@ namespace Tweakers
             throw new System.NotImplementedException();
         }
 
-        public List<Category> GetAllCategories()
+        public List<Category> GetAllCategories(int ID)
         {
-            throw new System.NotImplementedException();
+            return dbCategories.GetAllCategories(ID);
         }
 
         public List<Category> GetCategory(int ID)

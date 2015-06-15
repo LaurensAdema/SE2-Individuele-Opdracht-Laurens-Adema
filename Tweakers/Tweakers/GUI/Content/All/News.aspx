@@ -38,12 +38,13 @@
 
                 <!-- Comments Form -->
                 <div class="well">
-                    <h4>Leave a Comment:</h4>
-                    <form role="form">
+                    <h4>Reageren:</h4>
+                    <span runat="server" ID="errorMessage" style="color:red"></span>
+                    <form role="form" runat="server">
                         <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
+                            <asp:TextBox runat="server" TextMode="MultiLine" CssClass="form-control" rows ="7" id="postReaction"></asp:TextBox>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <asp:Button type="submit" id="btnSubmitReaction" class="btn btn-primary" OnClick="btnSubmitReaction_OnClick">Submit</asp:Button>
                     </form>
                 </div>
 
@@ -56,32 +57,8 @@
 
                 <!-- Blog Categories Well -->
                 <div class="well">
-                    <h4>Blog Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
+                    <h4>Categorieën</h4>
+                    <span runat="server" id="categoryArticle"></span>
                     </div>
                     <!-- /.row -->
                 </div>
