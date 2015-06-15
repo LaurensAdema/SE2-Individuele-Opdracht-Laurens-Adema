@@ -10,7 +10,6 @@
     <meta name="author" content="Laurens Adema">
     <%-- Style Section --%>
     <link href="../CSS/bootstrap.css" rel="stylesheet">
-    <link href="../CSS/bootstrap-theme.css" rel="stylesheet">
     <link href="../CSS/tweakers.css" rel="stylesheet">
     <asp:ContentPlaceHolder ID="StyleSection" runat="server" />
 </head>

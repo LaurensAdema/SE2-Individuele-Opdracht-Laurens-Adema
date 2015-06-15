@@ -203,6 +203,7 @@
     <Compile Include="Data layer\Database_OS.cs" />
     <Compile Include="Data layer\Database_Reaction.cs" />
     <Compile Include="Objects\Editor.cs" />
+    <Compile Include="Using\Order.cs" />
     <Compile Include="Using\Encrypt.cs" />
     <Compile Include="Objects\OS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

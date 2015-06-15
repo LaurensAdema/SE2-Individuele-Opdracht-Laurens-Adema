@@ -5,6 +5,7 @@ using System.Web.Services;
 using System.Web.Services.Protocols;
 using System.ComponentModel;
 using System.Web.Security;
+using Tweakers.Using;
 
 namespace Tweakers
 {
@@ -15,7 +16,7 @@ namespace Tweakers
         private Database_Article dbArticle = new Database_Article();
         private Database_Categories dbCategories = new Database_Categories();
         private Database_OS dbOs = new Database_OS();
-        private Database_Reaction dbrReaction = new Database_Reaction();
+        private Database_Reaction dbReaction = new Database_Reaction();
 
         private static Administration administration;
 
@@ -147,14 +148,15 @@ namespace Tweakers
             throw new System.NotImplementedException();
         }
 
-        public List<Reaction> GetAllReactions(Article article)
+        public List<Reaction> GetAllReactions(int ID)
         {
-            throw new System.NotImplementedException();
+            List<Reaction> reactions = SortOrder.OrderReactions(dbReaction.GetAllReactions(ID));
+            return reactions;
         }
 
-        public List<Reaction> GetReaction(int ID)
+        public Reaction GetReaction(int ID)
         {
-            return null;
+            return dbReaction.GetReaction(ID);
         }
 
         public void RemoveReaction(Reaction reaction)

@@ -17,7 +17,7 @@ namespace Tweakers
 
             if (ID != -1)
             {
-                string articleQuery = "SELECT * FROM ARTIKEL A LEFT JOIN A_VIDEO V ON A.artikelID = V.artikelID LEFT JOIN A_SOFTWAREUPDATE S ON A.artikelID = S.artikelID WHERE artikelID = :articleID";
+                string articleQuery = "SELECT * FROM ARTIKEL A LEFT JOIN A_VIDEO V ON A.artikelID = V.artikelID LEFT JOIN A_SOFTWAREUPDATE S ON A.artikelID = S.artikelID WHERE A.artikelID = :articleID";
                 List<OracleParameter> articleParameters = new List<OracleParameter>();
                 articleParameters.Add(new OracleParameter(":articleID", ID));
 
@@ -45,7 +45,7 @@ namespace Tweakers
                                 article = new Video(articleID, Administration.AdministrationProp.GetAccount(editorID),
                                     title, content, date, views,
                                     Administration.AdministrationProp.GetCategory(articleID),
-                                    Administration.AdministrationProp.GetReaction(articleID), videoID, videoPath);
+                                    Administration.AdministrationProp.GetAllReactions(articleID), videoID, videoPath);
                             }
                             else if (type == 'S')
                             {
@@ -62,7 +62,7 @@ namespace Tweakers
                                 article = new Update(articleID, Administration.AdministrationProp.GetAccount(editorID),
                                     title, content, date, views,
                                     Administration.AdministrationProp.GetCategory(articleID),
-                                    Administration.AdministrationProp.GetReaction(articleID), updateID,
+                                    Administration.AdministrationProp.GetAllReactions(articleID), updateID,
                                     GetArticle(parentID) as Update, release, version, download, website, fileSize,
                                     license, GetOSArticle(updateID));
                             }
@@ -71,7 +71,7 @@ namespace Tweakers
                                 article = new Article(articleID, Administration.AdministrationProp.GetAccount(editorID),
                                     title, content, date, views,
                                     Administration.AdministrationProp.GetCategory(articleID),
-                                    Administration.AdministrationProp.GetReaction(articleID));
+                                    Administration.AdministrationProp.GetAllReactions(articleID));
                             }
 
                             break;
@@ -143,13 +143,13 @@ namespace Tweakers
                             string videoPath = Convert.ToString(getAllNewsArticles["videoPath"]);
                             article = new Video(articleID, Administration.AdministrationProp.GetAccount(editorID), title,
                                 content, date, views, Administration.AdministrationProp.GetCategory(articleID),
-                                Administration.AdministrationProp.GetReaction(articleID), videoID, videoPath);
+                                null, videoID, videoPath);
                         }
                         else
                         {
                             article = new Article(articleID, Administration.AdministrationProp.GetAccount(editorID),
                                 title, content, date, views, Administration.AdministrationProp.GetCategory(articleID),
-                                Administration.AdministrationProp.GetReaction(articleID));
+                                null);
                         }
 
                         allNewsArticles.Add(article);
