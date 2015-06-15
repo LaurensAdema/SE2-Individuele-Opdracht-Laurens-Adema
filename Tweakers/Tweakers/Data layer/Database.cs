@@ -24,7 +24,7 @@ namespace Tweakers
             {
                 try
                 {
-                    this.Con.ConnectionString = localhost ? "User Id=Tweakers;Password=Welkom01;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SID=xe)));" : "User Id=Tweakers;Password=Welkom01;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.1.107)(PORT=1521))(CONNECT_DATA=(SID=xe)));";
+                    this.Con.ConnectionString = localhost ? "User Id=Tweakers;Password=Welkom01;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.1.107)(PORT=1521))(CONNECT_DATA=(SID=xe)));" : "User Id=dbi324942;Password=FSM6BF1PUf;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=fhictora01.fhict.local)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=fhictora)));";
                     Con.Open();
                 }
                 catch (OracleException e)
@@ -109,11 +109,9 @@ namespace Tweakers
         {
             try
             {
-                string CommandText = String.Format("DELETE FROM {0} WHERE ID = {1}", table, ID);
                 this.Connect();
-                OracleCommand deleteCommand = new OracleCommand();
-                deleteCommand.Connection = Con;
-                deleteCommand.CommandText = CommandText;
+                OracleCommand deleteCommand = new OracleCommand("DELETE FROM {0} WHERE ID = :delID", Con);
+                deleteCommand.Parameters.Add(":delID", ID);
                 deleteCommand.CommandType = CommandType.Text;
                 deleteCommand.ExecuteNonQuery();
             }
