@@ -8,7 +8,7 @@
                 <!-- Blog Post -->
 
                 <!-- Title -->
-                <h1>Blog Post Title</h1>
+                <span runat="server" id="titleArticle"></span>
 
                 <!-- Author -->
                 <p class="lead">

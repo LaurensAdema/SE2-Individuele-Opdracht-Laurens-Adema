@@ -92,6 +92,11 @@ namespace Tweakers
             throw new System.NotImplementedException();
         }
 
+        public List<Article> GetAllNewsArticles(DateTime dateTime)
+        {
+            return dbArticle.GetAllNewsArticles(dateTime);
+        }
+
         public void RemoveArticle(string article)
         {
             throw new System.NotImplementedException();
@@ -104,7 +109,7 @@ namespace Tweakers
 
         public Article GetArticle(int ID)
         {
-            throw new System.NotImplementedException();
+            return dbArticle.GetArticle(ID);
         }
 
         public void AddOS(OS OS)
@@ -147,9 +152,9 @@ namespace Tweakers
             throw new System.NotImplementedException();
         }
 
-        public Reaction GetReaction(Article article)
+        public List<Reaction> GetReaction(int ID)
         {
-            throw new System.NotImplementedException();
+            return null;
         }
 
         public void RemoveReaction(Reaction reaction)
@@ -177,9 +182,9 @@ namespace Tweakers
             throw new System.NotImplementedException();
         }
 
-        public List<Category> GetCategory(Article article)
+        public List<Category> GetCategory(int ID)
         {
-            throw new System.NotImplementedException();
+            return null;
         }
 
         public void UploadVideo()
