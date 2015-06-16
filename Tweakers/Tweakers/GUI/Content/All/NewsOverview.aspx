@@ -1,4 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GUI/Masterpages/NotLogged.master" AutoEventWireup="true" CodeBehind="NewsOverview.aspx.cs" Inherits="Tweakers.GUI.Content.NotLogged.NewsOverview" %>
+<%@ Import Namespace="System.Web.DynamicData" %>
+<%@ Import Namespace="System.Web.UI" %>
+<%@ Import Namespace="System.Web.UI.WebControls" %>
+<%@ Import Namespace="System.Web.UI.WebControls" %>
+<%@ Import Namespace="System.Web.UI.WebControls.Expressions" %>
+<%@ Import Namespace="System.Web.UI.WebControls.WebParts" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <section id="newsOverview">
         <div class="row">
@@ -26,26 +32,34 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
+                                <li>
+                                    <a href="#">Category Name</a>
                                 </li>
-                                <li><a href="#">Category Name</a>
+                                <li>
+                                    <a href="#">Category Name</a>
                                 </li>
-                                <li><a href="#">Category Name</a>
+                                <li>
+                                    <a href="#">Category Name</a>
                                 </li>
-                                <li><a href="#">Category Name</a>
+                                <li>
+                                    <a href="#">Category Name</a>
                                 </li>
                             </ul>
                         </div>
                         <!-- /.col-lg-6 -->
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
+                                <li>
+                                    <a href="#">Category Name</a>
                                 </li>
-                                <li><a href="#">Category Name</a>
+                                <li>
+                                    <a href="#">Category Name</a>
                                 </li>
-                                <li><a href="#">Category Name</a>
+                                <li>
+                                    <a href="#">Category Name</a>
                                 </li>
-                                <li><a href="#">Category Name</a>
+                                <li>
+                                    <a href="#">Category Name</a>
                                 </li>
                             </ul>
                         </div>

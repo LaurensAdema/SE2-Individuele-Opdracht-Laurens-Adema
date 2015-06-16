@@ -1,4 +1,10 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.Master.cs" Inherits="Tweakers.GUI.Main" %>
+<%@ Import Namespace="System.Web.DynamicData" %>
+<%@ Import Namespace="System.Web.UI" %>
+<%@ Import Namespace="System.Web.UI.WebControls" %>
+<%@ Import Namespace="System.Web.UI.WebControls" %>
+<%@ Import Namespace="System.Web.UI.WebControls.Expressions" %>
+<%@ Import Namespace="System.Web.UI.WebControls.WebParts" %>
 <!DOCTYPE html>
 <html lang="en">
 <head id="Head1" runat="server">
@@ -11,57 +17,65 @@
     <%-- Style Section --%>
     <link href="../CSS/bootstrap.css" rel="stylesheet">
     <link href="../CSS/tweakers.css" rel="stylesheet">
-    <asp:ContentPlaceHolder ID="StyleSection" runat="server" />
+    <asp:ContentPlaceHolder ID="StyleSection" runat="server"/>
 </head>
 <body>
-    <%--<form id="form1" runat="server">--%>
-    <div class="container">
-        <!-- Navbar -->
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
+<%--<form id="form1" runat="server">--%>
+<div class="container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="/GUI/Content/All/Index.aspx">Tweakers</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/GUI/Content/All/Index.aspx">Tweakers</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                <li runat="server" id="newsButton"><a href="/GUI/Content/All/NewsOverview.aspx">Nieuws</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Profielen<span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li runat="server" id="usersButton"><a href="#">Gebruikers</a></li>
-                    <li class="divider"></li>
-                    <li runat="server" id="tweakotineButton"><a href="#">Tweakotine ranglijst</a></li>
-                    <li runat="server" id="karmaButton"><a href="#">Karma ranglijst</a></li>
-                  </ul>
-                </li>
-              </ul>
-              <asp:ContentPlaceHolder ID="NavSection" runat="server">
+                <ul class="nav navbar-nav">
+                    <li runat="server" id="newsButton">
+                        <a href="/GUI/Content/All/NewsOverview.aspx">Nieuws</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Profielen<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li runat="server" id="usersButton">
+                                <a href="#">Gebruikers</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li runat="server" id="tweakotineButton">
+                                <a href="#">Tweakotine ranglijst</a>
+                            </li>
+                            <li runat="server" id="karmaButton">
+                                <a href="#">Karma ranglijst</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <asp:ContentPlaceHolder ID="NavSection" runat="server">
                 </asp:ContentPlaceHolder>
-             </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
-        <!-- Content Page Section -->
-        <div class="container">
-            <asp:ContentPlaceHolder ID="ContentSection" runat="server">
-            </asp:ContentPlaceHolder>
-        </div>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <!-- Content Page Section -->
+    <div class="container">
+        <asp:ContentPlaceHolder ID="ContentSection" runat="server">
+        </asp:ContentPlaceHolder>
     </div>
-    <!-- /container -->
-    <%-- Script Section --%>
-    <script type="text/javascript" src="../../JS/jquery-2.1.1.js"></script>
-    <script type="text/javascript" src="../../JS/jquery-2.1.1.intellisense.js"></script>
-    <script type="text/javascript" src="../../JS/bootstrap.js"></script>
-    <script type="text/javascript" src="../../JS/tweakers.js"></script>
-    <asp:ContentPlaceHolder ID="ScriptSection" runat="server" />
-    <%--</form>--%>
+</div>
+<!-- /container -->
+<%-- Script Section --%>
+<script type="text/javascript" src="../../JS/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="../../JS/jquery-2.1.1.intellisense.js"></script>
+<script type="text/javascript" src="../../JS/bootstrap.js"></script>
+<script type="text/javascript" src="../../JS/tweakers.js"></script>
+<asp:ContentPlaceHolder ID="ScriptSection" runat="server"/>
+<%--</form>--%>
 </body>
 </html>

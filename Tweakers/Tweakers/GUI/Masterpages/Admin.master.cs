@@ -1,15 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.Security;
-using System.Web.UI.WebControls;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Admin.master.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The admin.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Tweakers.GUI.Masterpages
 {
-    public partial class Admin : System.Web.UI.MasterPage
+    #region
+
+    using System;
+    using System.Web;
+    using System.Web.Security;
+    using System.Web.UI;
+
+    #endregion
+
+    /// <summary>
+    /// The admin.
+    /// </summary>
+    public partial class Admin : MasterPage
     {
+        /// <summary>
+        /// The page_ load.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             HttpCookie authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
@@ -19,9 +41,10 @@ namespace Tweakers.GUI.Masterpages
 
             if (account.GetType().ToString() != "Tweakers.Admin")
             {
-                Response.Redirect("/GUI/Content/All/Index.aspx");
+                this.Response.Redirect("/GUI/Content/All/Index.aspx");
             }
-            lblUser.InnerText = account.Username;
+
+            this.lblUser.InnerText = account.Username;
         }
     }
 }

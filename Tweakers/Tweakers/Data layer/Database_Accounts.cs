@@ -1,21 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using Oracle.ManagedDataAccess.Client;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Database_Accounts.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The database_ accounts.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Tweakers
 {
-    public class Database_Accounts: Database
+    #region
+
+    using System;
+    using System.Collections.Generic;
+
+    using Oracle.ManagedDataAccess.Client;
+
+    #endregion
+
+    /// <summary>
+    /// The database_ accounts.
+    /// </summary>
+    public class Database_Accounts : Database
     {
+        /// <summary>
+        /// </summary>
+        /// <param name="ID">
+        /// </param>
+        /// <returns>
+        /// The <see cref="Account"/>.
+        /// </returns>
         public Account GetAccount(int ID)
         {
             Account account = null;
 
-            string accountQuery = "SELECT G.*, A.adminID, A.volledigeNaam as volledigeNaamAdmin, R.* FROM GEBRUIKER G LEFT JOIN G_ADMIN A ON A.gebruikerID = G.gebruikerID LEFT JOIN G_REDACTEUR R ON R.gebruikerID = G.gebruikerID WHERE G.gebruikerID = :ID";
+            string accountQuery =
+                "SELECT G.*, A.adminID, A.volledigeNaam as volledigeNaamAdmin, R.* FROM GEBRUIKER G LEFT JOIN G_ADMIN A ON A.gebruikerID = G.gebruikerID LEFT JOIN G_REDACTEUR R ON R.gebruikerID = G.gebruikerID WHERE G.gebruikerID = :ID";
             List<OracleParameter> accountParameters = new List<OracleParameter>();
             accountParameters.Add(new OracleParameter(":ID", ID));
 
-            OracleDataReader getAccount = Read(accountQuery, accountParameters);
+            OracleDataReader getAccount = this.Read(accountQuery, accountParameters);
             if (getAccount != null)
             {
                 if (getAccount.HasRows)
@@ -25,24 +49,33 @@ namespace Tweakers
                         string userName = Convert.ToString(getAccount["gebruikersNaam"]);
                         string email = Convert.ToString(getAccount["email"]);
                         int tweakotine = 0;
-                        Int32.TryParse(getAccount["tweakotine"].ToString(), out tweakotine);
+                        int.TryParse(getAccount["tweakotine"].ToString(), out tweakotine);
                         int karma = 0;
-                        Int32.TryParse(getAccount["karma"].ToString(), out karma);
+                        int.TryParse(getAccount["karma"].ToString(), out karma);
                         DateTime birthDate;
                         DateTime.TryParse(getAccount["geboorteDatum"].ToString(), out birthDate);
                         string city = Convert.ToString(getAccount["woonplaats"]);
                         char gender;
-                        Char.TryParse(getAccount["geslacht"].ToString(), out gender);
+                        char.TryParse(getAccount["geslacht"].ToString(), out gender);
                         char type;
-                        Char.TryParse(getAccount["G_type"].ToString(), out type);
+                        char.TryParse(getAccount["G_type"].ToString(), out type);
 
                         switch (type)
                         {
                             case 'A':
                                 int adminID = Convert.ToInt32(getAccount["adminID"]);
                                 string fullNameAdmin = Convert.ToString(getAccount["volledigeNaamAdmin"]);
-                                account = new Admin(ID, userName, email, tweakotine, karma, birthDate, city, gender,
-                                    adminID, fullNameAdmin);
+                                account = new Admin(
+                                    ID, 
+                                    userName, 
+                                    email, 
+                                    tweakotine, 
+                                    karma, 
+                                    birthDate, 
+                                    city, 
+                                    gender, 
+                                    adminID, 
+                                    fullNameAdmin);
                                 break;
                             case 'R':
                                 int editorID = Convert.ToInt32(getAccount["redacteurID"]);
@@ -50,8 +83,20 @@ namespace Tweakers
                                 string description = Convert.ToString(getAccount["beschrijving"]);
                                 string writesAbout = Convert.ToString(getAccount["schrijftOver"]);
                                 DateTime authorSince = Convert.ToDateTime(getAccount["auteurSinds"]);
-                                account = new Editor(ID, userName, email, tweakotine, karma, birthDate, city, gender,
-                                    editorID, fullName, description, writesAbout, authorSince);
+                                account = new Editor(
+                                    ID, 
+                                    userName, 
+                                    email, 
+                                    tweakotine, 
+                                    karma, 
+                                    birthDate, 
+                                    city, 
+                                    gender, 
+                                    editorID, 
+                                    fullName, 
+                                    description, 
+                                    writesAbout, 
+                                    authorSince);
                                 break;
                             default:
                                 account = new Account(ID, userName, email, tweakotine, karma, birthDate, city, gender);
@@ -61,27 +106,46 @@ namespace Tweakers
                         break;
                     }
                 }
+
                 getAccount.Close();
             }
 
-            Close();
+            this.Close();
 
             return account;
         }
 
+        /// <summary>
+        /// The search account.
+        /// </summary>
+        /// <param name="query">
+        /// The query.
+        /// </param>
+        /// <param name="searchType">
+        /// The search type.
+        /// </param>
+        /// <param name="exact">
+        /// The exact.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Account"/>.
+        /// </returns>
         public Account SearchAccount(string query, string searchType, byte exact)
         {
             Account account = null;
-            string accountQuery = "SELECT G.*, A.adminID, A.volledigeNaam as volledigeNaamAdmin, R.* FROM GEBRUIKER G LEFT JOIN G_ADMIN A ON A.gebruikerID = G.gebruikerID LEFT JOIN G_REDACTEUR R ON R.gebruikerID = G.gebruikerID WHERE "; ;
+            string accountQuery =
+                "SELECT G.*, A.adminID, A.volledigeNaam as volledigeNaamAdmin, R.* FROM GEBRUIKER G LEFT JOIN G_ADMIN A ON A.gebruikerID = G.gebruikerID LEFT JOIN G_REDACTEUR R ON R.gebruikerID = G.gebruikerID WHERE ";
+            
             switch (searchType)
             {
-                case"email":
+                case "email":
                     accountQuery += "UPPER(G.email) ";
                     break;
-                case"username":
+                case "username":
                     accountQuery += "UPPER(G.gebruikersNaam) ";
                     break;
             }
+
             switch (exact)
             {
                 case 0:
@@ -95,7 +159,7 @@ namespace Tweakers
             List<OracleParameter> accountParameters = new List<OracleParameter>();
             accountParameters.Add(new OracleParameter(":QUERY", query));
 
-            OracleDataReader getAccount = Read(accountQuery, accountParameters);
+            OracleDataReader getAccount = this.Read(accountQuery, accountParameters);
             if (getAccount.HasRows)
             {
                 while (getAccount.Read())
@@ -104,9 +168,9 @@ namespace Tweakers
                     string userName = Convert.ToString(getAccount["gebruikersNaam"]);
                     string email = Convert.ToString(getAccount["email"]);
                     int tweakotine = 0;
-                    Int32.TryParse(getAccount["tweakotine"].ToString(), out tweakotine);
+                    int.TryParse(getAccount["tweakotine"].ToString(), out tweakotine);
                     int karma = 0;
-                    Int32.TryParse(getAccount["karma"].ToString(), out karma);
+                    int.TryParse(getAccount["karma"].ToString(), out karma);
                     DateTime birthDate = Convert.ToDateTime(getAccount["geboorteDatum"]);
                     string city = Convert.ToString(getAccount["woonplaats"]);
                     char gender = Convert.ToChar(getAccount["geslacht"]);
@@ -117,7 +181,17 @@ namespace Tweakers
                         case 'A':
                             int adminID = Convert.ToInt32(getAccount["adminID"]);
                             string fullNameAdmin = Convert.ToString(getAccount["volledigeNaamAdmin"]);
-                            account = new Admin(ID, userName, email, tweakotine, karma, birthDate, city, gender, adminID, fullNameAdmin);
+                            account = new Admin(
+                                ID, 
+                                userName, 
+                                email, 
+                                tweakotine, 
+                                karma, 
+                                birthDate, 
+                                city, 
+                                gender, 
+                                adminID, 
+                                fullNameAdmin);
                             break;
                         case 'R':
                             int editorID = Convert.ToInt32(getAccount["redacteurID"]);
@@ -125,7 +199,20 @@ namespace Tweakers
                             string description = Convert.ToString(getAccount["beschrijving"]);
                             string writesAbout = Convert.ToString(getAccount["schrijftOver"]);
                             DateTime authorSince = Convert.ToDateTime(getAccount["auteurSinds"]);
-                            account = new Editor(ID, userName, email, tweakotine, karma, birthDate, city, gender, editorID, fullName, description, writesAbout, authorSince);
+                            account = new Editor(
+                                ID, 
+                                userName, 
+                                email, 
+                                tweakotine, 
+                                karma, 
+                                birthDate, 
+                                city, 
+                                gender, 
+                                editorID, 
+                                fullName, 
+                                description, 
+                                writesAbout, 
+                                authorSince);
                             break;
                         default:
                             account = new Account(ID, userName, email, tweakotine, karma, birthDate, city, gender);
@@ -135,34 +222,70 @@ namespace Tweakers
                     break;
                 }
             }
+
             getAccount.Close();
 
-            Close();
+            this.Close();
 
             return account;
         }
 
+        /// <summary>
+        /// The get all accounts.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
         public List<Account> GetAllAccounts()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// The edit account.
+        /// </summary>
+        /// <param name="account">
+        /// The account.
+        /// </param>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
         public void EditAccount(Account account)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// The delete account.
+        /// </summary>
+        /// <param name="account">
+        /// The account.
+        /// </param>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
         public void DeleteAccount(Account account)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// The add account.
+        /// </summary>
+        /// <param name="account">
+        /// The account.
+        /// </param>
+        /// <param name="password">
+        /// The password.
+        /// </param>
         public void AddAccount(Account account, string password)
         {
             List<string> accountRowList = new List<string>();
             List<OracleParameter> accountParamaterList = new List<OracleParameter>();
 
-            accountRowList.Add("gebruikersNaam"); accountRowList.Add("wachtwoord"); accountRowList.Add("email");
+            accountRowList.Add("gebruikersNaam");
+            accountRowList.Add("wachtwoord");
+            accountRowList.Add("email");
 
             accountParamaterList.Add(new OracleParameter("gebruikersNaam", account.Username));
             accountParamaterList.Add(new OracleParameter("wachtwoord", password));
@@ -171,20 +294,44 @@ namespace Tweakers
             {
                 accountRowList.Add("G_Type");
                 accountParamaterList.Add(new OracleParameter("G_Type", "A"));
-            } else if (account is Editor)
+            }
+            else if (account is Editor)
             {
                 accountRowList.Add("G_Type");
                 accountParamaterList.Add(new OracleParameter("G_Type", "R"));
             }
 
-            Add("GEBRUIKER", accountRowList, accountParamaterList);
+            this.Add("GEBRUIKER", accountRowList, accountParamaterList);
         }
 
+        /// <summary>
+        /// The edit password.
+        /// </summary>
+        /// <param name="account">
+        /// The account.
+        /// </param>
+        /// <param name="newPassword">
+        /// The new password.
+        /// </param>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
         public void EditPassword(Account account, string newPassword)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// The check credentials.
+        /// </summary>
+        /// <param name="email">
+        /// The email.
+        /// </param>
+        /// <param name="password">
+        /// The password.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Account"/>.
+        /// </returns>
         public Account CheckCredentials(string email, string password)
         {
             Account account = null;
@@ -196,7 +343,7 @@ namespace Tweakers
             int ID = -1;
             string passwordEncrypted = null;
 
-            OracleDataReader getEncryptedAccount = Read(encryptQuery, encryptParameters);
+            OracleDataReader getEncryptedAccount = this.Read(encryptQuery, encryptParameters);
             if (getEncryptedAccount != null)
             {
                 if (getEncryptedAccount.HasRows)
@@ -207,15 +354,17 @@ namespace Tweakers
                         passwordEncrypted = Convert.ToString(getEncryptedAccount["wachtwoord"]);
                         break;
                     }
+
                     if (Encrypt.ValidatePassword(password, passwordEncrypted))
                     {
-                        account = GetAccount(ID);
+                        account = this.GetAccount(ID);
                     }
                 }
+
                 getEncryptedAccount.Close();
             }
-            
-            Close();
+
+            this.Close();
 
             return account;
         }

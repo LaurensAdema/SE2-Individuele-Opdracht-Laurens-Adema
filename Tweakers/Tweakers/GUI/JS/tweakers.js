@@ -1,16 +1,16 @@
 function showPassword() {
 
-    var key_attr = $('#key').attr('type');
+    var key_attr = $("#key").attr("type");
 
-    if (key_attr != 'text') {
+    if (key_attr != "text") {
 
-        $('.checkbox').addClass('show');
-        $('#key').attr('type', 'text');
+        $(".checkbox").addClass("show");
+        $("#key").attr("type", "text");
 
     } else {
 
-        $('.checkbox').removeClass('show');
-        $('#key').attr('type', 'password');
+        $(".checkbox").removeClass("show");
+        $("#key").attr("type", "password");
 
     }
 

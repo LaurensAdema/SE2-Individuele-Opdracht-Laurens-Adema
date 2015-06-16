@@ -1,4 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GUI/Masterpages/NotLogged.master" AutoEventWireup="true" CodeBehind="News.aspx.cs" Inherits="Tweakers.GUI.Content.NotLogged.News" %>
+<%@ Import Namespace="System.Web.DynamicData" %>
+<%@ Import Namespace="System.Web.UI" %>
+<%@ Import Namespace="System.Web.UI.WebControls" %>
+<%@ Import Namespace="System.Web.UI.WebControls" %>
+<%@ Import Namespace="System.Web.UI.WebControls.Expressions" %>
+<%@ Import Namespace="System.Web.UI.WebControls.WebParts" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <section id="news">
         <div class="row">
@@ -39,10 +45,10 @@
                 <!-- Comments Form -->
                 <div class="well">
                     <h4>Reageren:</h4>
-                    <span runat="server" ID="errorMessage" style="color:red"></span>
+                    <span runat="server" ID="errorMessage" style="color: red"></span>
                     <form role="form" runat="server">
                         <div class="form-group">
-                            <asp:TextBox runat="server" TextMode="MultiLine" CssClass="form-control" rows ="7" id="postReaction"></asp:TextBox>
+                            <asp:TextBox runat="server" TextMode="MultiLine" CssClass="form-control" rows="7" id="postReaction"></asp:TextBox>
                         </div>
                         <asp:Button type="submit" id="btnSubmitReaction" class="btn btn-primary" OnClick="btnSubmitReaction_OnClick">Submit</asp:Button>
                     </form>
@@ -59,17 +65,17 @@
                 <div class="well">
                     <h4>Categorieën</h4>
                     <span runat="server" id="categoryArticle"></span>
-                    </div>
-                    <!-- /.row -->
                 </div>
-
-                <!-- Side Widget Well -->
-                <div class="well">
-                    <h4>Side Widget Well</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
-                </div>
-
+                <!-- /.row -->
             </div>
+
+            <!-- Side Widget Well -->
+            <div class="well">
+                <h4>Side Widget Well</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+            </div>
+
+        </div>
 
         </div>
         <!-- /.row -->

@@ -1,15 +1,25 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/GUI/Masterpages/Main.Master" AutoEventWireup="true" CodeBehind="NotLogged.master.cs" Inherits="Tweakers.GUI.Masterpages.NotLogged" %>
+<%@ Import Namespace="System.Web.DynamicData" %>
+<%@ Import Namespace="System.Web.UI" %>
+<%@ Import Namespace="System.Web.UI.WebControls" %>
+<%@ Import Namespace="System.Web.UI.WebControls" %>
+<%@ Import Namespace="System.Web.UI.WebControls.Expressions" %>
+<%@ Import Namespace="System.Web.UI.WebControls.WebParts" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="StyleSection" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="NavSection" runat="server">
     <ul class="nav navbar-nav navbar-right">
-        <li runat="server" id="loginButton"><a href="/GUI/Content/NotLogged/Login.aspx">Inloggen</a></li>
-        <li runat="server" id="registerButton"><a href="/GUI/Content/NotLogged/Register.aspx">Registreren</a></li> 
+        <li runat="server" id="loginButton">
+            <a href="/GUI/Content/NotLogged/Login.aspx">Inloggen</a>
+        </li>
+        <li runat="server" id="registerButton">
+            <a href="/GUI/Content/NotLogged/Register.aspx">Registreren</a>
+        </li>
     </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentSection" runat="server">
     <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
-            </asp:ContentPlaceHolder>
+    </asp:ContentPlaceHolder>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptSection" runat="server">
 </asp:Content>

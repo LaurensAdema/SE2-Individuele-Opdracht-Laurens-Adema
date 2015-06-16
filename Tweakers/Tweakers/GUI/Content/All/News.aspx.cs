@@ -1,19 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="News.aspx.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The news.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Tweakers.GUI.Content.NotLogged
 {
-    public partial class News : System.Web.UI.Page
-    {
-        private StringBuilder reactionBuilder = new StringBuilder();
-        private List<Reaction> reactionsArticle; 
+    #region
 
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Web;
+    using System.Web.Security;
+    using System.Web.UI;
+
+    #endregion
+
+    /// <summary>
+    /// The news.
+    /// </summary>
+    public partial class News : Page
+    {
+        /// <summary>
+        /// The reaction builder.
+        /// </summary>
+        private readonly StringBuilder reactionBuilder = new StringBuilder();
+
+        /// <summary>
+        /// The reactions article.
+        /// </summary>
+        private List<Reaction> reactionsArticle;
+
+        /// <summary>
+        /// The page_ pre init.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         protected void Page_PreInit(object sender, EventArgs e)
         {
             HttpCookie authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
@@ -23,86 +54,143 @@ namespace Tweakers.GUI.Content.NotLogged
                 switch (authTicket.UserData)
                 {
                     case "Tweakers.Admin":
-                        MasterPageFile = "~/GUI/Masterpages/Admin.master";
+                        this.MasterPageFile = "~/GUI/Masterpages/Admin.master";
                         break;
                     case "Tweakers.Editor":
-                        MasterPageFile = "~/GUI/Masterpages/Editor.master";
+                        this.MasterPageFile = "~/GUI/Masterpages/Editor.master";
                         break;
                     case "Tweakers.Account":
-                        MasterPageFile = "~/GUI/Masterpages/User.master";
+                        this.MasterPageFile = "~/GUI/Masterpages/User.master";
                         break;
                     default:
-                        MasterPageFile = "~/GUI/Masterpages/NotLogged.master";
+                        this.MasterPageFile = "~/GUI/Masterpages/NotLogged.master";
                         break;
                 }
             }
         }
 
+        /// <summary>
+        /// The page_ load.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             int id = -1;
-            Int32.TryParse(Request.QueryString["id"], out id);
+            int.TryParse(this.Request.QueryString["id"], out id);
             if (id != -1)
             {
-                LoadArticle(id);
+                this.LoadArticle(id);
             }
         }
 
+        /// <summary>
+        /// The load article.
+        /// </summary>
+        /// <param name="ID">
+        /// The id.
+        /// </param>
         protected void LoadArticle(int ID)
         {
             Article article = Administration.AdministrationProp.GetArticle(ID);
             if (article != null)
             {
-                titleArticle.InnerHtml = String.Format("<h1>{0}</h1>", article.Title);
+                this.titleArticle.InnerHtml = string.Format("<h1>{0}</h1>", article.Title);
                 if (article.Editor is Editor)
                 {
                     Editor editor = article.Editor as Editor;
-                    authorArticle.InnerHtml = String.Format("<p class=\"lead\">door <a href=\"GUI/Content/All/User.aspx?id={0}\">{1}</a></p>", article.Editor.UserID, editor.FullName);
+                    this.authorArticle.InnerHtml =
+                        string.Format(
+                            "<p class=\"lead\">door <a href=\"GUI/Content/All/User.aspx?id={0}\">{1}</a></p>", 
+                            article.Editor.UserID, 
+                            editor.FullName);
                 }
                 else if (article.Editor is Admin)
                 {
                     Admin editor = article.Editor as Admin;
-                    authorArticle.InnerHtml = String.Format("<p class=\"lead\">door <a href=\"GUI/Content/All/User.aspx?id={0}\">{1}</a></p>", article.Editor.UserID, editor.FullName);
+                    this.authorArticle.InnerHtml =
+                        string.Format(
+                            "<p class=\"lead\">door <a href=\"GUI/Content/All/User.aspx?id={0}\">{1}</a></p>", 
+                            article.Editor.UserID, 
+                            editor.FullName);
                 }
-                dateArticle.InnerHtml = String.Format("<p><span class=\"glyphicon glyphicon-time\"></span> {0}</p>",
-                    FirstCharToUpper(article.Date.ToLongDateString() + " om " + article.Date.ToLongTimeString()));
-                contentArticle.InnerHtml = String.Format("{0}", article.Content);
 
-                LoadReactions(article.Reactions);
-                commentsArticle.InnerHtml = reactionBuilder.ToString();
+                this.dateArticle.InnerHtml = string.Format(
+                    "<p><span class=\"glyphicon glyphicon-time\"></span> {0}</p>", 
+                    this.FirstCharToUpper(article.Date.ToLongDateString() + " om " + article.Date.ToLongTimeString()));
+                this.contentArticle.InnerHtml = string.Format("{0}", article.Content);
 
-                categoryArticle.InnerHtml = LoadCategories(ID);
+                this.LoadReactions(article.Reactions);
+                this.commentsArticle.InnerHtml = this.reactionBuilder.ToString();
+
+                this.categoryArticle.InnerHtml = this.LoadCategories(ID);
             }
         }
 
+        /// <summary>
+        /// The load reactions.
+        /// </summary>
+        /// <param name="reactions">
+        /// The reactions.
+        /// </param>
         protected void LoadReactions(List<Reaction> reactions)
         {
-            reactionsArticle = reactions;
-            while (reactionsArticle.Count > 0)
+            this.reactionsArticle = reactions;
+            while (this.reactionsArticle.Count > 0)
             {
-                Reaction thisReaction = reactionsArticle[0];
-                LoadReaction(thisReaction);
-                reactionBuilder.Append(String.Format("</div></div>"));
-                reactionsArticle.Remove(thisReaction);
+                Reaction thisReaction = this.reactionsArticle[0];
+                this.LoadReaction(thisReaction);
+                this.reactionBuilder.Append("</div></div>");
+                this.reactionsArticle.Remove(thisReaction);
             }
-            
         }
 
+        /// <summary>
+        /// The load reaction.
+        /// </summary>
+        /// <param name="reaction">
+        /// The reaction.
+        /// </param>
         protected void LoadReaction(Reaction reaction)
         {
             if (reaction.Parent != null)
             {
-                LoadReaction(reaction.Parent);
-                reactionBuilder.Append(String.Format("<!-- Nested Comment --><div class=\"media\"><a class=\"pull-left\" href=\"GUI/Content/All/User.aspx?id={0}\"><img class=\"media-object\" src=\"http://placehold.it/64x64\" alt=\"\"></a><div class=\"media-body\"><h4 class=\"media-heading\"><a href=\"GUI/Content/All/User.aspx?id={0}\">{1}</a><small>{2}</small></h4>{3}</div></div><!-- End Nested Comment -->", reaction.Account.UserID, reaction.Account.Username, reaction.Date.ToString("d MMMM yyyy om HH:mm"), reaction.ReactionString));
-                reactionsArticle.Remove(reaction);
+                this.LoadReaction(reaction.Parent);
+                this.reactionBuilder.Append(
+                    string.Format(
+                        "<!-- Nested Comment --><div class=\"media\"><a class=\"pull-left\" href=\"GUI/Content/All/User.aspx?id={0}\"><img class=\"media-object\" src=\"http://placehold.it/64x64\" alt=\"\"></a><div class=\"media-body\"><h4 class=\"media-heading\"><a href=\"GUI/Content/All/User.aspx?id={0}\">{1}</a><small>{2}</small></h4>{3}</div></div><!-- End Nested Comment -->", 
+                        reaction.Account.UserID, 
+                        reaction.Account.Username, 
+                        reaction.Date.ToString("d MMMM yyyy om HH:mm"), 
+                        reaction.ReactionString));
+                this.reactionsArticle.Remove(reaction);
             }
             else
             {
-                reactionBuilder.Append(String.Format("<div class=\"media\"><a class=\"pull-left\" href=\"GUI/Content/All/User.aspx?id={0}\"><img class=\"media-object\" src=\"http://placehold.it/64x64\" alt=\"\"></a><div class=\"media-body\"><h4 class=\"media-heading\"><a href=\"GUI/Content/All/User.aspx?id={0}\">{1}</a><small>{2}</small></h4>{3}", reaction.Account.UserID, reaction.Account.Username, reaction.Date.ToString("d MMMM yyyy om HH:mm"), reaction.ReactionString));
-                reactionsArticle.Remove(reaction);
+                this.reactionBuilder.Append(
+                    string.Format(
+                        "<div class=\"media\"><a class=\"pull-left\" href=\"GUI/Content/All/User.aspx?id={0}\"><img class=\"media-object\" src=\"http://placehold.it/64x64\" alt=\"\"></a><div class=\"media-body\"><h4 class=\"media-heading\"><a href=\"GUI/Content/All/User.aspx?id={0}\">{1}</a><small>{2}</small></h4>{3}", 
+                        reaction.Account.UserID, 
+                        reaction.Account.Username, 
+                        reaction.Date.ToString("d MMMM yyyy om HH:mm"), 
+                        reaction.ReactionString));
+                this.reactionsArticle.Remove(reaction);
             }
         }
 
+        /// <summary>
+        /// The load categories.
+        /// </summary>
+        /// <param name="ID">
+        /// The id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         protected string LoadCategories(int ID)
         {
             List<Category> categories = Administration.AdministrationProp.GetAllCategories(ID);
@@ -117,32 +205,51 @@ namespace Tweakers.GUI.Content.NotLogged
                 for (int i = 0; i < leftRowCount; i++)
                 {
                     categoryHTML.Append(
-                        String.Format(
-                            "<li><a href=\"/GUI/Content/All/Category.aspx?id={0}\">{1}</a></li>",
-                            categories[i].CategoryID,
+                        string.Format(
+                            "<li><a href=\"/GUI/Content/All/Category.aspx?id={0}\">{1}</a></li>", 
+                            categories[i].CategoryID, 
                             categories[i].CategoryString));
                 }
+
                 categoryHTML.Append("</ul></div><div class=\"col-lg-6\"><ul class=\"list-unstyled\">");
                 for (int i = leftRowCount; i < categories.Count; i++)
                 {
                     categoryHTML.Append(
-                        String.Format(
-                            "<li><a href=\"/GUI/Content/All/Category.aspx?id={0}\">{1}</a></li>",
-                            categories[i].CategoryID,
+                        string.Format(
+                            "<li><a href=\"/GUI/Content/All/Category.aspx?id={0}\">{1}</a></li>", 
+                            categories[i].CategoryID, 
                             categories[i].CategoryString));
                 }
+
                 categoryHTML.Append("</ul></div>");
             }
-            
 
             return categoryHTML.ToString();
         }
 
+        /// <summary>
+        /// The first char to upper.
+        /// </summary>
+        /// <param name="input">
+        /// The input.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public string FirstCharToUpper(string input)
         {
-            return !String.IsNullOrEmpty(input) ? input.First().ToString().ToUpper() + input.Substring(1) : input;
+            return !string.IsNullOrEmpty(input) ? input.First().ToString().ToUpper() + input.Substring(1) : input;
         }
 
+        /// <summary>
+        /// The btn submit reaction_ on click.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         public void btnSubmitReaction_OnClick(object sender, EventArgs e)
         {
             HttpCookie authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
@@ -151,14 +258,14 @@ namespace Tweakers.GUI.Content.NotLogged
             {
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
 
-                if (Page.IsValid)
+                if (this.Page.IsValid)
                 {
-                    errorMessage.InnerText = "De ingevoerde gegevens zijn onjuist.";
+                    this.errorMessage.InnerText = "De ingevoerde gegevens zijn onjuist.";
                 }
             }
             else
             {
-                errorMessage.InnerText = "U moet ingelogd zijn om een reactie te plaatsen.";
+                this.errorMessage.InnerText = "U moet ingelogd zijn om een reactie te plaatsen.";
             }
         }
     }

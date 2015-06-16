@@ -1,19 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Logout.aspx.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The logout.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Tweakers.GUI.Content.All
 {
-    public partial class Logout : System.Web.UI.Page
+    #region
+
+    using System;
+    using System.Web.Security;
+    using System.Web.UI;
+
+    #endregion
+
+    /// <summary>
+    /// The logout.
+    /// </summary>
+    public partial class Logout : Page
     {
+        /// <summary>
+        /// The page_ load.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
             FormsAuthentication.SignOut();
-            Response.Redirect(Request.UrlReferrer != null ? Request.UrlReferrer.ToString() : "../NotLogged/Index.aspx");
+            this.Response.Redirect(
+                this.Request.UrlReferrer != null ? this.Request.UrlReferrer.ToString() : "../NotLogged/Index.aspx");
         }
     }
 }

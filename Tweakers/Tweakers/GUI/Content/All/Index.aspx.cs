@@ -1,15 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Index.aspx.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   The index.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Tweakers.GUI.Content.NotLogged
 {
-    public partial class Index : System.Web.UI.Page
+    #region
+
+    using System;
+    using System.Web;
+    using System.Web.Security;
+    using System.Web.UI;
+
+    #endregion
+
+    /// <summary>
+    /// The index.
+    /// </summary>
+    public partial class Index : Page
     {
+        /// <summary>
+        /// The page_ pre init.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         protected void Page_PreInit(object sender, EventArgs e)
         {
             HttpCookie authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
@@ -20,28 +42,36 @@ namespace Tweakers.GUI.Content.NotLogged
                 switch (authTicket.UserData)
                 {
                     case "Tweakers.Admin":
-                        MasterPageFile = "~/GUI/Masterpages/Admin.master";
+                        this.MasterPageFile = "~/GUI/Masterpages/Admin.master";
                         break;
                     case "Tweakers.Editor":
-                        MasterPageFile = "~/GUI/Masterpages/Editor.master";
+                        this.MasterPageFile = "~/GUI/Masterpages/Editor.master";
                         break;
                     case "Tweakers.Account":
-                        MasterPageFile = "~/GUI/Masterpages/User.master";
+                        this.MasterPageFile = "~/GUI/Masterpages/User.master";
                         break;
                     default:
-                        MasterPageFile = "~/GUI/Masterpages/NotLogged.master";
+                        this.MasterPageFile = "~/GUI/Masterpages/NotLogged.master";
                         break;
                 }
             }
             else
             {
-                MasterPageFile = "~/GUI/Masterpages/NotLogged.master";
+                this.MasterPageFile = "~/GUI/Masterpages/NotLogged.master";
             }
         }
 
+        /// <summary>
+        /// The page_ load.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
     }
 }
